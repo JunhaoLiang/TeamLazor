@@ -1,26 +1,30 @@
 import os
 
-def Read_BFF(path):
-	'''
-	This code is used to read the BFF file and save the content
-	 into a .txt file under the same directory of the path.
+class BFF_Reader():
+	def __init__(self, file_path):
+		self.file_path = file_path
 
-	In order to read the file, path of .BFF file should be provided.
-	'''
+	def read_file(self):
+		#read BFF file.
+		File = open(self.file_path, "r")
+		return File.read()
 
-	file = os.path.basename(path)
-	file_name = os.path.splitext(file)[0]
-	txt_path = os.path.dirname(path)
-	txt_file = open("%s/" % txt_path + file_name + ".txt", "w")
+	def split_by_line(self):
+		#split file by lines and return all lines as a list. 
+		return self.read_file().strip().split("\r\n")
 
-	fileData = open(path)
-	for lines in fileData:
-		print(lines)
-		txt_file.writelines(lines)
-
-	txt_file.close()
+	def get_grid(self):
+		#Return grid as a list of list.
+		lines = self.split_by_line
+		pass
 
 
 
-if __name__ == "__main__":
-	Read_BFF("/Users/zacooky/Desktop/Lazor_Project/mad_1.bff")
+	print("Works fine!")
+
+
+
+if __name__ == '__main__':
+	BR = BFF_Reader("/Users/zacooky/Desktop/Lazor_Project/BFF_TXT/mad_1.bff")
+	BR.read_file()
+	print(BR.get_grid())
